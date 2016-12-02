@@ -15,6 +15,8 @@ before_install:
 
 install: "pip install -r requirements.txt"
 
+before_script:
+  export PYTHONPATH=$PYTHONPATH:$(pwd)
+
 script:
-  source PYTHONPATH=.
   pytest
