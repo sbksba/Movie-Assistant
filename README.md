@@ -15,19 +15,19 @@ Usage
 > _Create a profile_  
     `python main.py -d data/Small/ -n ZERO`
 
-> _Print the data base movie for a profile_
+> _Print the data base movie for a profile_  
     `python main.py -d data/Small/ -n ZERO -p movie`
 
-> _Print the data base movie for a profile in a web page_
+> _Print the data base movie for a profile in a web page_  
     `python main.py -d data/Small/ -n ZERO -w all -t movie`
 
-> _Print the stats for the data base movie of a profile_
+> _Print the stats for the data base movie of a profile_  
     `python main.py -d data/Small/ -s terminal -t movie`
 
-> _Delete a profile_
+> _Delete a profile_  
     `python main.py -d data/Small/ -e ZERO`
 
-> _Print the movies currently playing at the movie theater_
+> _Print the movies currently playing at the movie theater_  
     `python main.py -d data/Small/ -s terminal -t movie`
 
 ## Licence
