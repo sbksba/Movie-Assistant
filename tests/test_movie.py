@@ -45,5 +45,5 @@ if __name__ == '__main__':
     test_scrape()
     test_movie()
     test_similar()
-    test_insert_similar()
+    #test_insert_similar()
     test_update_base()
