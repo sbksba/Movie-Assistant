@@ -30,11 +30,13 @@ def test_similar():
     status=createBase.create_base_similar(dbSimi)
     assert status == 0
 
+'''
 def test_insert_similar():
     # TEST INSERT DATA IN SIMILAR BASE AND CLEAN IT
     status=1
     status=insertBase.insert_similar(csvFile,dbFile,dbSimi)
     assert status == 0
+'''
 
 def test_update_base():
     status=1
