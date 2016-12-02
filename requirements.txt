@@ -1,4 +1,4 @@
 pytest
+pysqlite
 tmdbsimple
 matplotlib
-sqlite3
