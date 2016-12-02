@@ -8,6 +8,9 @@ python:
  - "2.6"
  - "2.7"
 
+ActiveRecord::Base.establish_connection :adapter => 'sqlite3',
+                                        :database => ':memory:'
+
 install: "pip install -r requirements.txt"
 
 script: pytest
