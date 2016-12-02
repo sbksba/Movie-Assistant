@@ -1,6 +1,8 @@
 MovieAssistant
 ==============
 
+[![Build Status](https://travis-ci.org/sbksba/Movie-Assistant.svg?branch=master)](https://travis-ci.org/sbksba/Movie-Assistant)
+
 Synopsis
 --------
 
