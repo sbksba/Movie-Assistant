@@ -28,7 +28,7 @@ Usage
     `python main.py -d data/Small/ -e ZERO`
 
 > _Print the movies currently playing at the movie theater_  
-    `python main.py -d data/Small/ -s terminal -t movie`
+    `python main.py -d data/Small/ -n ZERO -a nowPlaying`
 
 ## Licence
 
