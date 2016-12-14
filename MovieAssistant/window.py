@@ -47,17 +47,17 @@ def window():
             p = Profile(name,dir)
     except:
         if len(sys.argv) != 3:
-            parser.error("Error Arguments")
+            #parser.error("Error Arguments")
+            print ""
 
 def bench():
 
-    p = Profile("BENCH","data/Small")
+    p = Profile("benjamin","data/benjamin")
     print p
     table="movie"                # OR similar
     p.printBase(table)
     p.statBase(table)
-    p.plotBase(table)
+    #p.plotBase(table)
     p.webPage(table,"all")
-    p.theaterInfo("nowPlaying")  # OR upcoming OR popular
-    #p.update()
+    #p.theaterInfo("nowPlaying")  # OR upcoming OR popular
     #p.delete()

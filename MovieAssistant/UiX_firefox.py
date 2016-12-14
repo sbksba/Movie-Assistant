@@ -4,6 +4,8 @@ import re
 import csv
 import sqlite3
 
+from security import internet_access,exist_file
+
 def read_template(template):
     """ returns html string from `templates/_<template>.html` """
     return ''.join([row for row in open('templates/_{}.html'.format(template),
@@ -39,20 +41,21 @@ def create_movie_tiles_content(movies):
     return content
 
 def open_movies_page(movies, filename='myMovies.html'):
-    """ creates output movie html and opens it in browser """
-    # Create or overwrite the output file
-    output_file = open(filename, 'w')
+    if (internet_access("print the movie webpage")):
+        """ creates output movie html and opens it in browser """
+        # Create or overwrite the output file
+        output_file = open(filename, 'w')
 
-    # Replace the placeholder for the movie tiles with the actual dynamically generated content
-    rendered_content = main_page_content.format(movie_tiles=create_movie_tiles_content(movies))
+        # Replace the placeholder for the movie tiles with the actual dynamically generated content
+        rendered_content = main_page_content.format(movie_tiles=create_movie_tiles_content(movies))
 
-    # Output the file
-    output_file.write(main_page_head + rendered_content)
-    output_file.close()
+        # Output the file
+        output_file.write(main_page_head + rendered_content)
+        output_file.close()
 
-    # open the output file in the browser
-    url = os.path.abspath(output_file.name)
-    webbrowser.open('file://' + url, new=2) # open in a new tab, if possible
+        # open the output file in the browser
+        url = os.path.abspath(output_file.name)
+        webbrowser.open('file://' + url, new=2) # open in a new tab, if possible
 
 class Movie(object):
     """ represents a movie """
@@ -79,17 +82,20 @@ def get_movies(filename):
 
 def get_movies_db(filename,genre,table):
     """ pulls movie data from csv and returns a list a Movie objects """
-    db = sqlite3.connect(filename)
-    cur = db.cursor()
-    movies = []
-    if genre == 'all':
-        cur.execute('select * from {tn}'.format(tn=table))
-    else:
-        cur.execute('select * from {tn} where genre="{genre}"'.format(tn=table,genre=genre))
+    if (exist_file(filename)):
+        db = sqlite3.connect(filename)
+        cur = db.cursor()
+        movies = []
+        if genre == 'all':
+            cur.execute('select * from {tn}'.format(tn=table))
+        else:
+            cur.execute('select * from {tn} where genre="{genre}"'.format(tn=table,genre=genre))
 
-    for movie in cur:
-        movies.append(Movie(title=movie[1],
+        for movie in cur:
+            movies.append(Movie(title=movie[1],
                             image_url=movie[2],
                             youtube_url=movie[3],
                             year=movie[4].encode('ascii', 'ignore').decode('ascii')))
-    return movies
+        return movies
+    else:
+        return False

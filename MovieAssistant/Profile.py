@@ -23,13 +23,11 @@ class Profile(object):
         self.moviePath = moviePath
 
         if (op.exists(path)):
-            #print "\nProfile Already Exists"
             self.name = name
             self.moviePath = moviePath
             self.new_profile = False
             status=update_base(self.moviePath, self.getProfilePath()+dbFile, "movie", self.getProfilePath()+dbSimi, self.getProfilePath()+csvFile)
         else:
-            #print "\nCreate Profile"
             os.makedirs(path)
             self.name = name
             self.new_profile = True
@@ -76,10 +74,12 @@ class Profile(object):
     def webPage(self,table,genre):
         if (table == "movie"):
             movies = get_movies_db(self.getProfilePath()+dbFile,genre,table)
-            open_movies_page(movies, self.getProfilePath()+'myMovies.html')
+            if (movies != False):
+                open_movies_page(movies, self.getProfilePath()+'myMovies.html')
         elif (table == "similar"):
             movies = get_movies_db(self.getProfilePath()+dbSimi,genre,table)
-            open_movies_page(movies, self.getProfilePath()+'myMovies.html')
+            if (movies != False):
+                open_movies_page(movies, self.getProfilePath()+'myMovies.html')
 
     def theaterInfo(self,choice):
         if (choice == "nowPlaying"):
@@ -90,7 +90,3 @@ class Profile(object):
             popular()
         else:
             print "\nError : choice unknow"
-
-    def update(self):
-        print "\nNOT WORK VERY WELL"
-        status=update_base(self.moviePath, self.getProfilePath()+dbFile, "movie", self.getProfilePath()+dbSimi, self.getProfilePath()+csvFile)
