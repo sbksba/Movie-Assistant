@@ -146,8 +146,36 @@ def update_base(DIR_path,DB_filepath,table,DB_Similar,CSV_filepath):
                                 to_db = [s['title'],"https://image.tmdb.org/t/p/w185/"+s['poster_path'],gVideo,s['release_date'].rsplit('-',2)[0],gName]
                             break
                         status = insert_base(to_db,DB_filepath,table)
+
+                        ## SIMILAR DATA BASE
+                        #print "UPDATE SIMILAR"
+                        response = search.movie(query=s['title'])
+                        for si in search.results:
+                            id = si['id']
+                            break
+
+                        movie = tmdb.Movies(id)
+                        responseM = movie.similar_movies()
+                        responseG = genre.list()
+                        for si in responseM.get('results'):
+                            # GET GENRE NAME AND YOUTUBE URL
+                            gName = get_genre_name(si,responseG)
+                            gVideo = get_video_url(si['id'])
+
+                            # INSERT IN BASE
+                            if (si['poster_path'] is not None):
+                                if (si['release_date'] is not None):
+                                    to_db = [si['title'],"https://image.tmdb.org/t/p/w185/"+si['poster_path'],gVideo,s['release_date'].rsplit('-',2)[0].encode('utf-8'),gName]
+                                    status = insert_base(to_db,DB_Similar,"similar")
+
                         i += 1
                         printProgress(i, l, prefix = 'Progress:', suffix = 'movie', barLength = 50)
 
-            status=insert_similar(CSV_filepath,DB_filepath,DB_Similar)
+            # DEL DOUBLE IN BASE
+            #check_double(DB_Similar,"similar")
+            status = del_double(DB_Similar,"similar")
+
+            # DEL MOVIE ALREADY EXISTS IN MOVIE BASE
+            status = finalize_base(CSV_filepath,DB_Similar)
+            #status=insert_similar(CSV_filepath,DB_filepath,DB_Similar)
         return 0
