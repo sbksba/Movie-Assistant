@@ -10,7 +10,7 @@ tmdb.API_KEY = '7196d4486bd0fda2b04e9dac5db9e3df'
 csvFile='tests/tmp/movie.csv'
 dbFile='tests/tmp/MovieBase.sqlite'
 dbSimi='tests/tmp/SimilarBase.sqlite'
-testPath='data/Small'
+testPath='data/zero'
 
 def test_scrape():
     # TEST SCRAPE INFORMATION AND CREATE CSV FILE
@@ -30,11 +30,13 @@ def test_similar():
     status=createBase.create_base_similar(dbSimi)
     assert status == 0
 
+'''
 def test_insert_similar():
     # TEST INSERT DATA IN SIMILAR BASE AND CLEAN IT
     status=1
     status=insertBase.insert_similar(csvFile,dbFile,dbSimi)
     assert status == 0
+'''
 
 def test_update_base():
     status=1
@@ -45,5 +47,5 @@ if __name__ == '__main__':
     test_scrape()
     test_movie()
     test_similar()
-    test_insert_similar()
+    #test_insert_similar()
     test_update_base()
