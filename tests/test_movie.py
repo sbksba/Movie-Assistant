@@ -27,7 +27,7 @@ def test_movie():
 def test_similar():
     # TEST CREATE SIMILAR BASE
     status=1
-    status=createBase.create_base_similar(dbSimi)
+    status=createBase.create_base_similar(csvFile,dbFile,dbSimi)
     assert status == 0
 
 '''
