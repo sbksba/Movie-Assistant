@@ -1,4 +1,4 @@
 pytest
 tmdbsimple
 matplotlib
-sqlite3
+
