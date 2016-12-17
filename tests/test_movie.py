@@ -1,6 +1,6 @@
 from MovieAssistant import scraper
 from MovieAssistant import createBase
-from MovieAssistant import insertBase
+from MovieAssistant import update
 
 import tmdbsimple as tmdb
 
@@ -40,7 +40,7 @@ def test_insert_similar():
 
 def test_update_base():
     status=1
-    status=insertBase.update_base(testPath, dbFile, "movie", dbSimi, csvFile)
+    status=update.update_base(testPath, dbFile, "movie", dbSimi, csvFile)
     assert status == 0
 
 if __name__ == '__main__':
