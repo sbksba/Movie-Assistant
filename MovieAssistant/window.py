@@ -1,5 +1,6 @@
 from Profile import Profile
 
+from Config_tools import ConfigSectionMap
 from optparse import OptionParser
 import sys
 import os
@@ -51,13 +52,14 @@ def window():
             print ""
 
 def bench():
-
-    p = Profile("benjamin","data/benjamin")
+    name = ConfigSectionMap("PROFILE")['default']
+    dire = ConfigSectionMap("PROFILE")['dir']
+    p = Profile(name,dire)
     print p
-    table="movie"                # OR similar
+    table="movie"
     p.printBase(table)
     p.statBase(table)
     #p.plotBase(table)
     p.webPage(table,"all")
-    #p.theaterInfo("nowPlaying")  # OR upcoming OR popular
+    p.theaterInfo("nowPlaying")
     #p.delete()
